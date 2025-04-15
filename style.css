@@ -1,0 +1,124 @@
+body {
+    display: flex;
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    height: 100vh; /* Chiều cao toàn màn hình */
+    margin: 0;
+    background-color: #000000; /* Nền màu đen */
+    color: #ffffff; /* Màu chữ trắng để dễ đọc */
+}
+
+#gameContainer {
+    margin-right: 20px; /* Khoảng cách giữa canvas và infoContainer */
+    display: flex;
+    flex-direction: column; /* Đặt các phần tử bên trong theo chiều dọc */
+    align-items: center; /* Căn giữa canvas và các nút */
+}
+
+#resetBtn {
+    font-family: "Permanent Marker", cursive; /* Phông chữ độc đáo */
+    font-size: 22px;
+    width: 120px;
+    padding: 10px 20px; /* Thêm khoảng cách bên trong */
+    color: #ffffff; /* Màu chữ trắng */
+    background-color: #ff5722; /* Màu nền cam đậm */
+    border: none; /* Loại bỏ viền */
+    border-radius: 10px; /* Bo tròn góc */
+    cursor: pointer; /* Thay đổi con trỏ khi hover */
+    box-shadow: 0 0 15px 3px #ff5722; /* Hiệu ứng phát sáng cam */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+#resetBtn:hover {
+    background-color: #e64a19; /* Màu nền tối hơn khi hover */
+    box-shadow: 0 0 20px 5px #e64a19; /* Tăng hiệu ứng phát sáng khi hover */
+    transform: scale(1.1); /* Phóng to nút khi hover */
+}
+
+#resetBtn:active {
+    transform: scale(0.95); /* Thu nhỏ nút khi nhấn */
+    box-shadow: 0 0 10px 2px #e64a19; /* Giảm hiệu ứng phát sáng khi nhấn */
+}
+
+#infoContainer {
+    position: absolute; /* Đặt phần tử ở vị trí tuyệt đối */
+    top: 20px; /* Cách mép trên của cửa sổ 20px */
+    right: 20px; /* Cách mép phải của cửa sổ 20px */
+    text-align: left; /* Căn chữ sang trái */
+    padding: 20px; /* Thêm khoảng cách bên trong */
+    border: 2px solid #ff9800; /* Viền màu cam nổi bật */
+    border-radius: 10px; /* Bo tròn góc */
+    background-color: #000000; /* Nền màu đen */
+    box-shadow: 0 0 15px 3px #ff9800; /* Hiệu ứng phát sáng cam */
+    color: #ffffff; /* Màu chữ trắng */
+    opacity: 0; /* Ẩn phần giới thiệu ban đầu */
+    transform: translateY(-20px); /* Dịch chuyển lên trên một chút */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Hiệu ứng chuyển đổi */
+}
+
+#infoContainer:hover {
+    opacity: 1; /* Hiển thị phần giới thiệu khi hover */
+    transform: translateY(0); /* Đưa phần giới thiệu về vị trí ban đầu */
+    box-shadow: 0 0 20px 5px #ff9800; /* Tăng hiệu ứng phát sáng khi hover */
+}
+
+#infoContainer h1 {
+    font-size: 24px;
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+    color: #e65100; /* Màu cam đậm cho tiêu đề */
+}
+
+#infoContainer p {
+    margin: 5px 0; /* Khoảng cách giữa các đoạn văn */
+    font-size: 16px;
+    color: #bf360c; /* Màu nâu cam cho chữ */
+}
+
+#gameBoard {
+    border: 4px solid #ff9800; /* Viền màu cam nổi bật */
+    border-radius: 15px; /* Bo tròn góc */
+    background-color: #fafafa; /* Màu nền sáng */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    margin-bottom: 20px; /* Khoảng cách dưới canvas */
+}
+
+#score {
+    font-family: "Permanent Marker", cursive;
+    font-size: 100px;
+}
+
+#resetBtn {
+    font-family: "Permanent Marker", cursive; /* Phông chữ độc đáo */
+    font-size: 22px;
+    width: 120px;
+    padding: 10px 20px; /* Thêm khoảng cách bên trong */
+    color: #ffffff; /* Màu chữ trắng */
+    background-color: #ff5722; /* Màu nền cam đậm */
+    border: none; /* Loại bỏ viền */
+    border-radius: 10px; /* Bo tròn góc */
+    cursor: pointer; /* Thay đổi con trỏ khi hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+#resetBtn:hover {
+    background-color: #e64a19; /* Màu nền tối hơn khi hover */
+    transform: scale(1.1); /* Phóng to nút khi hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Tăng hiệu ứng đổ bóng */
+}
+
+#resetBtn:active {
+    transform: scale(0.95); /* Thu nhỏ nút khi nhấn */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Giảm hiệu ứng đổ bóng */
+}
+/* Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
