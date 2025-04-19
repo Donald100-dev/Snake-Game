@@ -5,9 +5,10 @@ const resetBtn = document.querySelector("#resetBtn");
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const boardBackground = "black";
-const snakeColor = "lightgreen";
-const snakeBorder = "black";
-const foodColor = "red"
+const snakeBodyColor = "#4dd0e1"; // Màu xanh nhạt cho thân rắn
+const snakeHeadColor = "#b2f7ef"; // Màu xanh nhạt sáng cho đầu rắn
+const snakeBorder = "#00bcd4"; // Màu viền xanh lam
+const foodColor = "#73fc03";
 const unitSize = 25;
 let running = false;
 let xVelocity = unitSize;
@@ -64,12 +65,21 @@ function createFood(){
 };
 function drawFood(){
     ctx.fillStyle = foodColor;
+    ctx.shadowColor = "#98fc0a";
+    ctx.shadowBlur = 40; // Độ tỏa sáng lớn hơn
     ctx.fillRect(foodX, foodY, unitSize, unitSize);
+    ctx.shadowBlur = 0; // Tắt bóng cho các phần khác
 };
 function moveSnake(){
     const head = {
-        x: snake[0].x + xVelocity,
-        y: snake[0].y + yVelocity
+        x: (snake[0].x + xVelocity) % gameWidth,
+        y: (snake[0].y + yVelocity) % gameHeight
+    };
+    if (head.x < 0){
+        head.x = gameWidth - unitSize;
+    }
+    if (head.y < 0){
+        head.y = gameHeight - unitSize;
     };
     snake.unshift(head);
     if (head.x == foodX && head.y == foodY){
@@ -82,12 +92,23 @@ function moveSnake(){
     };
 };
 function drawSnake(){
-    ctx.fillStyle = snakeColor;
     ctx.strokeStyle = snakeBorder;
-    snake.forEach(snakePart =>{
+    snake.forEach((snakePart, index) =>{
+        // Đầu rắn có thể sáng hơn một chút
+        if(index === 0){
+            ctx.fillStyle = snakeHeadColor; // Xanh nhạt sáng cho đầu
+            ctx.shadowBlur = 25; // Độ tỏa sáng lớn hơn
+        } else {
+            ctx.fillStyle = snakeBodyColor; // Xanh nhạt cho thân
+            ctx.shadowBlur = 15;
+        }
+        ctx.shadowColor = "#00fff7";
+        ctx.strokeStyle = "#00bcd4";
+        ctx.lineWidth = 2.5; // Độ dày viền
         ctx.fillRect(snakePart.x, snakePart.y, unitSize, unitSize);
         ctx.strokeRect(snakePart.x, snakePart.y, unitSize, unitSize);
-    })
+        ctx.shadowBlur = 0; // Tắt bóng cho các phần khác
+    });
 };
 function changeDirection(event){
     const keyPressed = event.keyCode;
